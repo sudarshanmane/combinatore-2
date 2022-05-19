@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+ 
+            #productsDiv{
+                display: grid;
+                grid-template-columns: repeat(3,1fr);
+                gap: 30px 30px;
+                margin: auto;
+                width: 100%;
+                
+            }
+            #productsDiv>box{
+                margin: auto;
+            }
+            #firstHeading{
+            display: flex;
+            justify-content: space-around;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div id="firstHeading"><h1><a href="products.html">products</a></h1> 
+        <h1><a href="ProductDataPage.html">products page</a></h1></div>
+
+        <h4>Total Products = <h4 id="counter"></h4></h4></h4> 
+
+
+
+<div id="productsDiv"></div>
+
+</body>
+</html>
+
+<script>
+      var productsData = JSON.parse(localStorage.getItem("Products")) || [];
+
+      document.querySelector("#counter").innerHTML = productsData.length;
+
+display(productsData)
+    function display(productsData){
+          
+        productsData.forEach(function(el,i){
+      
+              var productsDiv  = document.querySelector("#productsDiv");
+      
+              var box = document.createElement("box")
+      
+              var name = document.createElement("p")
+              name.innerText=el.product;
+      
+              var cate = document.createElement("p")
+              cate.innerText=el.cate;
+      
+      
+              var image = document.createElement("img")
+              image.src=el.image;
+      
+              var price = document.createElement("P")
+              price.innerText=el.price;
+      
+             
+      
+      
+        
+              var btn1 = document.createElement("button")
+              btn1.innerText="Remove"
+
+              btn1.addEventListener("click",function(){
+              deleteFun(el,i)
+
+        })
+      
+              var btn2= document.createElement("button")
+              btn2.innerText="Sold : False";
+              btn2.style.color="red"
+              btn2.style.backgroundColor="black"
+
+              btn2.onclick = function ChangeContent(){
+                btn2.innerText="SOLD :True"
+                btn2.style.color="green"
+              }
+      
+      
+              box.append(image,name,cate,price,btn1,btn2)
+              
+              productsDiv.append(box)
+          })
+      }
+     
+function deleteFun(el,i){
+    productsData.splice(i,1)
+    localStorage.setItem("Products",JSON.stringify(productsData))
+    window.location.reload();
+}
+
+
+      
+
+      
+      
+</script>
