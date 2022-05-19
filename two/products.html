@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #firstHeading{
+            display: flex;
+            justify-content: space-around;
+        }
+    </style>
+</head>
+<body>
+    <div id="firstHeading"><h1><a href="products.html">products</a></h1> 
+        <h1><a href="ProductDataPage.html">products page</a></h1></div>
+
+
+
+    <form id="form" >
+        <input type="text" placeholder="Product name" id="product">
+        <input type="text" placeholder="Category" id="category">
+        <input type="text" placeholder="Image url" id="image">
+        <input type="text" placeholder="Price" id="price">
+        <select name="" id="select">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+        
+        <input type="submit">
+    </form>
+    
+    <div id="productsDiv"></div>
+
+</body>
+</html>
+
+<script>
+  
+
+   function Products(product,cate,image,price,select,sold){
+            this.product = product;
+            this.cate = cate;
+            this.image = image;
+            this.price = price;
+            this.select = select;
+   }
+
+let arr =JSON.parse(localStorage.getItem("Products")) ||[];
+
+
+document.querySelector("#form").addEventListener("submit",myFunction)
+
+    function myFunction(){
+        event.preventDefault();
+        let product = form.product.value;
+        let cate = form.category.value;
+        let image = form.image.value;
+        let price = form.price.value;
+        let select = form.select.value;
+        
+
+      let products= new Products(product,cate,image,price,select);
+      arr.push(products)
+     localStorage.setItem("Products",JSON.stringify(arr));
+       window.location.href="ProductDataPage.html"
+    }
+
+
+      
+     
+
+
+</script> 
